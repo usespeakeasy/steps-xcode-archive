@@ -43,7 +43,20 @@ func (s *CertificateSource) QueryCertificateBySerial(serial big.Int) (autocodesi
 func (s *CertificateSource) QueryAllIOSCertificates() (map[appstoreconnect.CertificateType][]autocodesign.Certificate, error) {
 	typeToCertificates := map[appstoreconnect.CertificateType][]autocodesign.Certificate{}
 
-	for _, certType := range []appstoreconnect.CertificateType{appstoreconnect.Development, appstoreconnect.IOSDevelopment, appstoreconnect.Distribution, appstoreconnect.IOSDistribution} {
+	certificateTypes := []appstoreconnect.CertificateType{
+		appstoreconnect.Development,
+		appstoreconnect.IOSDevelopment,
+		appstoreconnect.Distribution,
+		appstoreconnect.IOSDistribution,
+	}
+	if s.client.IsEnterpriseAccount {
+		certificateTypes = []appstoreconnect.CertificateType{
+			appstoreconnect.IOSDevelopment,
+			appstoreconnect.IOSDistribution,
+		}
+	}
+
+	for _, certType := range certificateTypes {
 		certs, err := queryCertificatesByType(s.client, certType)
 		if err != nil {
 			return map[appstoreconnect.CertificateType][]autocodesign.Certificate{}, err

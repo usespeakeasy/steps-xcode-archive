@@ -53,7 +53,8 @@ type service struct {
 
 // Client communicate with the Apple API
 type Client struct {
-	EnableDebugLogs bool
+	EnableDebugLogs     bool
+	IsEnterpriseAccount bool
 
 	keyID             string
 	issuerID          string
@@ -153,10 +154,11 @@ func NewClient(httpClient HTTPClient, keyID, issuerID string, privateKey []byte,
 	}
 
 	c := &Client{
-		keyID:             keyID,
-		issuerID:          issuerID,
-		privateKeyContent: privateKey,
-		audience:          targetAudience,
+		IsEnterpriseAccount: isEnterpise,
+		keyID:               keyID,
+		issuerID:            issuerID,
+		privateKeyContent:   privateKey,
+		audience:            targetAudience,
 
 		client:  httpClient,
 		BaseURL: baseURL,
