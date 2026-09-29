@@ -25,7 +25,10 @@ No upstream PR has been submitted. Add its link here when one is opened in
 [go-xcode](https://github.com/bitrise-io/go-xcode). The archive step must then
 release a version that includes the fixed library.
 
-Speak iOS must pin this fork to a full commit SHA, not a mutable branch. Keep
-the normal App Store and TestFlight workflows on the official archive step.
+Bitrise's `git::` Step source accepts a branch or tag, but not a commit SHA.
+Speak iOS uses the protected `speak-6.1.3-enterprise.1` tag, which points to
+commit `76474231b1fc35646e91b1b31bd0a48aedc6d7ff`. The tag cannot be
+updated or deleted under the repository ruleset. Do not use a mutable branch.
+Keep the normal App Store and TestFlight workflows on the official archive step.
 Before removing the fork, run both QA Dev and QA Prod workflows with the fixed
 official release and confirm automatic signing and Firebase distribution succeed.
