@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # https://github.com/actions/stale
-      - uses: actions/stale@v3
+      - uses: actions/stale@v3.0.19
         with:
           repo-token: ${{ secrets.CORESTEPS_BOT_GITHUB_TOKEN }}
           # do not manage PRs
@@ -46,7 +46,7 @@ jobs:
         with:
           time: '1m'
       # https://github.com/dessant/lock-threads
-      - uses: dessant/lock-threads@v2
+      - uses: dessant/lock-threads@v2.1.2
         with:
           github-token: ${{ secrets.CORESTEPS_BOT_GITHUB_TOKEN }}
           # do not manage PRs
